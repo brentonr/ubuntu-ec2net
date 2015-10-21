@@ -15,3 +15,7 @@
 
 ACTION=="add", SUBSYSTEM=="net", KERNEL=="eth*", IMPORT{program}="/bin/sleep 1"
 SUBSYSTEM=="net", RUN+="/etc/network/ec2net.hotplug"
+ACTION=="add", SUBSYSTEM=="net", KERNEL=="eth*", \
+  RUN+="/sbin/ifup $env{INTERFACE}"
+ACTION=="remove", SUBSYSTEM=="net", KERNEL=="eth*", \
+  RUN+="/sbin/ifdown $env{INTERFACE}"
